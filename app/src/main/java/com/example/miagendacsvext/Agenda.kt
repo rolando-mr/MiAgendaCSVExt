@@ -9,10 +9,10 @@ class Agenda(private val context: Context) {
     var contactos = mutableListOf<Contacto>()
     private val nombreArchivo = "contactos.csv"
 
-    private fun obtenerArchivo(): File {
-        val carpetaDescargas = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-        return File(carpetaDescargas, nombreArchivo)
+    init {
+        cargarContactos()
     }
+
 
     fun agregarContacto(contacto: Contacto) {
         contactos.add(contacto)
@@ -34,7 +34,10 @@ class Agenda(private val context: Context) {
         }
         return false
     }
-
+    private fun obtenerArchivo(): File {
+        val carpetaDescargas = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+        return File(carpetaDescargas, nombreArchivo)
+    }
     fun guardarContactos() {
         try {
             val archivo = obtenerArchivo()
